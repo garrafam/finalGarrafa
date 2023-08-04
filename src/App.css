@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+.titulo{
+  font-family: cursive;
+  font-size: 30px !important;
+}
+.navbar{
+  flex-wrap: nowrap!important;
+}
+.imgcarr{
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+}
+span{
+  margin: 5px;
+}
+.bienvenido{
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: cursive;
+  font-style: italic;
+}
