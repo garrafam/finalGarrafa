@@ -28,9 +28,10 @@ export const NavBar=()=>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                       <Nav className="justify-content-end flex-grow-1 pe-3">
-                        <Nav.Link href="#action1">Plasticos </Nav.Link>
-                        <Nav.Link href="#action2">Aromatizacion</Nav.Link>
-                        <Nav.Link href="#action3">Productos sueltos</Nav.Link>                       
+                      <Nav.Link href="/">Home </Nav.Link>
+                        <Nav.Link href="/categoria/Plasticos">Plasticos </Nav.Link>
+                        <Nav.Link href="/categoria/aromatizacion">Aromatizacion</Nav.Link>
+                        <Nav.Link href="/categoria/Producto-suelto">Productos sueltos</Nav.Link>                       
                       </Nav>                      
                     </Offcanvas.Body>
                   </Navbar.Offcanvas>                 

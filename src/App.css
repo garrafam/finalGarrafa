@@ -58,3 +58,14 @@ span{
   font-family: cursive;
   font-style: italic;
 }
+.cardHome{
+display: flex;
+flex-wrap: wrap;
+}
+.count{
+  display: flex;
+  flex-wrap: wrap;
+}
+.stock{
+  font-size: 25px;
+}
