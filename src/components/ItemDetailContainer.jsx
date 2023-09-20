@@ -2,24 +2,29 @@ import { useParams } from "react-router-dom";
 import { ItemDetail } from "./ItemDetail";
 import { useState, useEffect } from "react"
 import  {Container } from "react-bootstrap"
-import data from "../data/productos.json"
+
+import { getFirestore, getDoc, doc} from "firebase/firestore"
 
 import '../App.css'
 
+
 export const ItemDetailContainer =(props)=>{
-    const [producto, setProducto ] =useState([]);
+    const [producto, setProducto ] =useState([null]);
+    const [loading, setLoading] =useState(true)
     const {id}= useParams()
 
+
     useEffect (()=>{
-    const promise= new Promise ((resolve, reject)=>{
-    setTimeout(()=>{ 
-    const productoById=data.find((producto)=>producto.id=== id);
-    resolve(productoById);
-  },    2000);
-    });
-    promise.then((data)=> setProducto(data));
-}, []);
-if (producto.length === 0) return (<div>Loading...</div>)
+      const db = getFirestore()
+      const refDoc = doc(db, "Items",id )
+      getDoc(refDoc).then(snapshot=>{
+        setProducto({id : snapshot.id, ...snapshot.data() })
+      })
+      .finally(()=>setLoading(false))
+    },[])
+
+   
+if (loading) return (<div>Loading...</div>)
 
 
  return( 

@@ -2,27 +2,36 @@ import { ItemList } from "./ItemList";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 import  {Container } from "react-bootstrap"
-import data from "../data/productos.json"
-
+import {collection, getFirestore, getDocs, query, where,} from "firebase/firestore"
 import '../App.css'
 
 export const ItemListContainer =(props)=>{
     const [product, setProduct ] =useState([]);
+    const [loading, setLoading] =useState(true)
     const {id}= useParams()
+
     useEffect (()=>{
-    const promise= new Promise ((resolve, reject)=>{
-    setTimeout(()=> resolve(data),2000);
-    });
-    promise.then((data)=> {
-        if(!id) {setProduct(data);
-    } else {
-        const productFiltered = data.filter(product=>product.categoria === id);
-        setProduct(productFiltered)
-    }
-}   
-    );
+    const db= getFirestore()
+    const refCollection= id
+     ? query(collection(db, "Items"), where ("Categoria", "==", id))
+     : collection(db, "Items")
+
+
+   
+    getDocs(refCollection)
+    .then(snapshot=>{
+        if (snapshot.size===0) alert("no se encontraron resultados")
+        else setProduct(
+    snapshot.docs.map( doc=>{
+        return {id: doc.id, ...doc.data()}
+    }))
+    })
+  
+    .finally(()=>{
+        setLoading(false)
+    })
 }, []);
-    if (product.length === 0) return (<div>Loading...</div>)
+    if (loading) return (<div>Loading...</div>)
 
 
     return( 

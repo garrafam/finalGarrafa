@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import '../App.css';
+//import { useContext } from 'react';
 
-export const ItemCount= ({value}) =>{
+export const ItemCount= ({value,onAdd,stock }) =>{
+   console.log({stock ,value})
     const[contador, setcontador]= useState(value)
-   const handclick =() =>{
-    if(contador>=5) return
+   const handclick =() =>{  
+    if( contador >=stock ) return
    setcontador (contador + 1 )
-        console.log(setcontador)
+        
 
     }
     const handclick1 =() =>{
-        if(contador <1) return
+        if(contador <= 1) return
         setcontador (contador - 1)
-             console.log()
-     
+             
          }
     return(
-        <>
-        <h1>soy un contador</h1>
+        <>        
         <div  className='count'>  
         <button onClick={  handclick1 }>-</button>
         <p>{contador}</p>
         <button onClick={  handclick }>+</button>
-        <button>Agregar al carrito</button>
+        <button onClick={()=>onAdd(contador)}>Agregar al carrito</button>
         
         </div>
         </>

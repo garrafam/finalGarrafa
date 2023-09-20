@@ -1,44 +1,33 @@
-import { Card } from './Card';
+import { CardWidget } from './Cardwidget';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
+import data from "../data/productos.json"
+import { Item } from './Item';
 
 
+const categorie =(data.map(producto => producto.categoria))
+const uniqueCategories = new Set(categorie)
+
+export const NavBar = () => (
 
 
-export const NavBar=()=>
-     {
-        return (
-          <>
-            {[false].map((expand) => (
-              <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
-                <Container fluid>
-                  <Navbar.Brand className='titulo' href="#">Pelusitas</Navbar.Brand>
-                  <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-                  <Navbar.Offcanvas
-                    id={`offcanvasNavbar-expand-${expand}`}
-                    aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                    placement="end"
-                  >
-                    <Offcanvas.Header closeButton>
-                      <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                        Productos de limpieza
-                      </Offcanvas.Title>
-                    </Offcanvas.Header>
-                    <Offcanvas.Body>
-                      <Nav className="justify-content-end flex-grow-1 pe-3">
-                      <Nav.Link href="/">Home </Nav.Link>
-                        <Nav.Link href="/categoria/Plasticos">Plasticos </Nav.Link>
-                        <Nav.Link href="/categoria/aromatizacion">Aromatizacion</Nav.Link>
-                        <Nav.Link href="/categoria/Producto-suelto">Productos sueltos</Nav.Link>                       
-                      </Nav>                      
-                    </Offcanvas.Body>
-                  </Navbar.Offcanvas>                 
-                </Container>
-                <Card/>
-              </Navbar>
-            ))}
-          </>
-        );
-      }
+  <Navbar bg="dark" data-bs-theme="dark" >
+    <Container >
+      <Navbar.Brand className='titulo' href="#home">Pelusitas</Navbar.Brand>
+      <Nav className="me-auto">
+        <Nav.Link href="/">Home </Nav.Link>
+        {[...uniqueCategories].map(categoria=> (
+          <Nav.Link as={NavLink} key={categoria.id} to={`/categoria/${categoria}`}>{categoria}</Nav.Link>
+          
+        ))}
+      </Nav>
+      <CardWidget data-bs-theme="dark"/>
+    </Container>
+  </Navbar>
+
+)
+

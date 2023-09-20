@@ -6,14 +6,17 @@ import Card from 'react-bootstrap/Card';
 export const Item = ({product})=>(
   
     <Card key= {product.id} style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={product.foto} />
+        <Card.Img variant="top" src={product.Foto} />
         <Card.Body>
-          <Card.Title>{product.nombre}</Card.Title>
+          <Card.Title>{product.Nombre}</Card.Title>
           <Card.Text>
-           {product.categoria}
+           {product.Categoria}
           </Card.Text>
           <Card.Text>
-           ${product.precio}
+           {product.Stock}
+          </Card.Text>
+          <Card.Text>
+           ${product.Precio}
           </Card.Text>
           <Link to={`/item/${product.id} `}>
             

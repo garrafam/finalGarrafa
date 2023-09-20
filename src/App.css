@@ -69,3 +69,7 @@ flex-wrap: wrap;
 .stock{
   font-size: 25px;
 }
+.foto {
+width: 20 px !important;
+height: 20 px;
+}
