@@ -18,8 +18,7 @@ export const CartProvider= ({children})=> {
         setItems(actualizarProductos)
     }
     }
-    const totalWidget= items.reduce((acc, val) =>acc + val.quantity , 0)
-    console.log()
+    const totalWidget= items.reduce((acc, val) =>acc + val.quantity , 0)    
     const removeItem=id=>{
     const itemsFiltered=items.filter(item=>item.id !== id)
     setItems  (itemsFiltered)
@@ -29,7 +28,7 @@ export const CartProvider= ({children})=> {
     
    
     return (
-< CartContext.Provider value={{addItem, items, removeItem, clear,totalWidget}}>
+< CartContext.Provider value={{addItem, items, setItems, removeItem, clear,totalWidget}}>
 {children}
  </CartContext.Provider>
     )

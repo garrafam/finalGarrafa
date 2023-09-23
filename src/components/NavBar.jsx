@@ -3,25 +3,40 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../context/CartContext';
-import data from "../data/productos.json"
-import { Item } from './Item';
+import {useState, useEffect} from 'react';
+import {collection, getFirestore, getDocs, } from "firebase/firestore"
+import { useParams } from "react-router-dom";
 
+export const NavBar = () => { 
+const [producto, setProducto ] =useState([]);
+const {id}= useParams()
 
-const categorie =(data.map(producto => producto.categoria))
-const uniqueCategories = new Set(categorie)
+useEffect (()=>{
+  const db= getFirestore()
+  const refCollection= collection(db, "Items")
+ 
+  getDocs(refCollection)
+  .then(snapshot=>{
+      if (snapshot.size===0) alert("no se encontraron resultados")
+      else setProducto(
+  snapshot.docs.map( doc=>{
+ return({id: doc.id, ...doc.data()}  )
 
-export const NavBar = () => (
+    
+  }))})
+})
 
+let nombresReales = producto.map(producto => producto.Categoria);
+const uniqueCategories =new Set(nombresReales)
 
+return(
   <Navbar bg="dark" data-bs-theme="dark" >
     <Container >
       <Navbar.Brand className='titulo' href="#home">Pelusitas</Navbar.Brand>
       <Nav className="me-auto">
         <Nav.Link href="/">Home </Nav.Link>
-        {[...uniqueCategories].map(categoria=> (
-          <Nav.Link as={NavLink} key={categoria.id} to={`/categoria/${categoria}`}>{categoria}</Nav.Link>
+        {[...uniqueCategories].map(Categoria=> (
+          <Nav.Link as={NavLink} key={Categoria} to={`/Categoria/${Categoria}`}>{Categoria}</Nav.Link>
           
         ))}
       </Nav>
@@ -30,4 +45,4 @@ export const NavBar = () => (
   </Navbar>
 
 )
-
+        }

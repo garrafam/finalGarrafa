@@ -21,16 +21,17 @@ export const ItemListContainer =(props)=>{
     getDocs(refCollection)
     .then(snapshot=>{
         if (snapshot.size===0) alert("no se encontraron resultados")
-        else setProduct(
+        else setProduct (
     snapshot.docs.map( doc=>{
         return {id: doc.id, ...doc.data()}
+       
     }))
     })
   
     .finally(()=>{
         setLoading(false)
     })
-}, []);
+}, [id]);
     if (loading) return (<div>Loading...</div>)
 
 

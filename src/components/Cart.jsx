@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import  {Container, FormGroup, Table} from "react-bootstrap"
+import  {Container, Table} from "react-bootstrap"
 import { CartContext } from "../context/CartContext"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -47,6 +47,7 @@ export const Cart=()=>{
        
     }
     return(
+
         <Container>
             <h1>Carrito de compras</h1>
             <Table striped bordered hover variant=" dark">
@@ -111,7 +112,7 @@ export const Cart=()=>{
               <Form.Label>Email</Form.Label>
               <Form.Control 
               onChange={handleChange}
-              value={formValues.Email}
+              value={formValues.email}
               type="email"
               name="email" 
               required

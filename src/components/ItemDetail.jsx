@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartContext"
    
 
 export const ItemDetail =({producto})=>{ 
+       console.log(producto)
        const {addItem}= useContext(CartContext)
        const onAdd= (contador)=> addItem(producto , contador )
        return( 

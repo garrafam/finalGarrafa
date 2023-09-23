@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import '../App.css';
-//import { useContext } from 'react';
 
-export const ItemCount= ({value,onAdd,stock }) =>{
-   console.log({stock ,value})
+
+export const ItemCount= ({value,onAdd,stock }) =>{  
     const[contador, setcontador]= useState(value)
    const handclick =() =>{  
     if( contador >=stock ) return

@@ -18,10 +18,10 @@ export const ItemDetailContainer =(props)=>{
       const db = getFirestore()
       const refDoc = doc(db, "Items",id )
       getDoc(refDoc).then(snapshot=>{
-        setProducto({id : snapshot.id, ...snapshot.data() })
+        setProducto  ({id : snapshot.id, ...snapshot.data() })
       })
       .finally(()=>setLoading(false))
-    },[])
+    },[id])
 
    
 if (loading) return (<div>Loading...</div>)
