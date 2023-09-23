@@ -5,11 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {collection, getFirestore, getDocs, } from "firebase/firestore"
-import { useParams } from "react-router-dom";
+
 
 export const NavBar = () => { 
 const [producto, setProducto ] =useState([]);
-const {id}= useParams()
+
 
 useEffect (()=>{
   const db= getFirestore()
