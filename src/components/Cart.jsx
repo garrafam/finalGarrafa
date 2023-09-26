@@ -8,15 +8,14 @@ import '../App.css';
 
 
 export const Cart=()=>{
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [validated, setValidated] = useState();
-
+    const [Nombre, setName] = useState();
+    const [Telefono, setPhone] = useState();
+    const [email, setEmail] = useState();
+    const [validated, setValidated] = useState();  
     const [formValues, setFormValue]= useState({
-        name:"",
-        phone: "" ,
-        email:""
+       Nombre:"",
+       Telefono: "" ,
+        Email:""
 
     })
     const { clear, items, removeItem} = useContext (CartContext)
@@ -26,12 +25,12 @@ export const Cart=()=>{
     )
 
     const isFormValid = () => {
-        if (!name || !phone ||!email ) {
+        if (!Nombre|| !Telefono ||!email ) {
           return false;
         }
         return true;
       };
-      
+   
     const sendOrder= ( )=>{
         const order={
             buyer: formValues,
@@ -44,8 +43,8 @@ export const Cart=()=>{
         addDoc (orderCollection, order ).then(({id}) =>{
             if(id){
                 setFormValue({
-                    nombre:"",
-                    telefono: "" ,
+                    Nombre:"",
+                    Telefono: "" ,
                     Email: ""  , 
                 })
                 clear()
@@ -60,10 +59,10 @@ export const Cart=()=>{
           alert("El carro está vacío, por favor añade productos antes de enviar.");
           return;
         } 
-        if (!isFormValid()) {
+       if (isFormValid()) {
             alert("Por favor, completa todos los campos del formulario antes de enviar.");
             return;
-          }      
+          }   
       }
    
     return(
@@ -108,46 +107,43 @@ export const Cart=()=>{
             </Table>
             <h2>Ingresar datos de usuarios</h2>          
 
-            <Form  noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form >
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
-               value={formValues.name}
+              
                type="text"
                name="Nombre" 
-               onChange={(e) => setName(e.target.value)}
-                className={`form-control ${name ? "" : "is-invalid"}`}/>
-                <div className="invalid-feedback">
-                      El nombre es obligatorio.
-                 </div>
+               onChange={handleSubmit}
+                />
+               
                
             </Form.Group>            
           
             <Form.Group className="mb-3" >
-              <Form.Label required>Telefono</Form.Label>
+              <Form.Label >Telefono</Form.Label>
               <Form.Control
-               value={formValues.phone}
+               
                type="text"
                name="phone"
-               onChange={(e) => setPhone(e.target.value)}
-               className={`form-control ${phone ? "" : "is-invalid"}`}/>
-                <div className="invalid-feedback">
-                      El telefono es obligatorio.
-                 </div>             
+               onChange={handleSubmit}
+            />
+                
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control 
-             value={formValues.email}
+           
              type="email"
              name="email" 
-             onChange={(e) => setEmail(e.target.value)}
-               className={`form-control ${email ? "" : "is-invalid"}`}/>
-               <div className="invalid-feedback">
-                     El e-mail es obligatorio.
-               </div>
+             onChange={handleSubmit}
+             
+             />
+            
+
             </Form.Group>
-           
+            <button type="submit" disabled={items.length === 0 || isFormValid()}>Enviar Pedido</button>
+   
         <Button type="submit" onClick={sendOrder}>Comprar</Button>
           </Form>
          

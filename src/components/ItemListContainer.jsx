@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import  {Container } from "react-bootstrap"
 import {collection, getFirestore, getDocs, query, where,} from "firebase/firestore"
 import '../App.css'
-
+import { NavBar } from "./NavBar";
 export const ItemListContainer =(props)=>{
     const [product, setProduct ] =useState([]);
     const [loading, setLoading] =useState(true)
@@ -42,7 +42,7 @@ export const ItemListContainer =(props)=>{
      <div className="bienvenido">{props.greeting }</div>
      <div className="cardHome">
        <ItemList product={product}/>
-
+      
      </div>
 
 

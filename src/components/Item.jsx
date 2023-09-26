@@ -3,8 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-export const Item = ({product})=>(
-  
+export const Item = ({product})=>( 
     <Card key= {product.id} style={{ width: '18rem' }}>
         <Card.Img variant="top" src={product.Foto} />
         <Card.Body>

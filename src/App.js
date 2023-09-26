@@ -5,8 +5,10 @@ import { ItemListContainer } from './components/ItemListContainer';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { NavBar } from './components/NavBar';
 import { CartProvider } from './context/CartContext';
+import { ProdutProvider } from './context/ProdutContext';
 function App() {
   return (
+    <ProdutProvider>
    <CartProvider>
     <BrowserRouter>    
     <NavBar/>
@@ -19,6 +21,7 @@ function App() {
      </Routes>        
     </BrowserRouter>
   </CartProvider>
+  </ProdutProvider>
    
   );
 }

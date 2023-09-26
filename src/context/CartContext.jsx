@@ -3,7 +3,7 @@ import { createContext , useState } from "react";
 export const CartContext = createContext ([]);
 export const CartProvider= ({children})=> {  
     const [items, setItems ] = useState([])
-
+    
     const addItem=(producto, quantity) =>  { 
      const alreadyExist = items.some (item=> item.id=== producto.id)
      if (!alreadyExist)

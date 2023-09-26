@@ -3,33 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
-import {useState, useEffect} from 'react';
-import {collection, getFirestore, getDocs, } from "firebase/firestore"
+import {useContext} from 'react';
+import { ProdutContext } from '../context/ProdutContext';
+
 
 
 export const NavBar = () => { 
-const [producto, setProducto ] =useState([]);
-
-
-useEffect (()=>{
-  const db= getFirestore()
-  const refCollection= collection(db, "Items")
+  const {product} = useContext (ProdutContext)
  
-  getDocs(refCollection)
-  .then(snapshot=>{
-      if (snapshot.size===0) alert("no se encontraron resultados")
-      else setProducto(
-  snapshot.docs.map( doc=>{
- return({id: doc.id, ...doc.data()}  )
 
-    
-  }))})
-})
-
-let nombresReales = producto.map(producto => producto.Categoria);
+let nombresReales =product.map(producto => producto.Categoria);
 const uniqueCategories =new Set(nombresReales)
-
+console.log(product)
 return(
+  
   <Navbar bg="dark" data-bs-theme="dark" >
     <Container >
       <Navbar.Brand className='titulo' href="#home">Pelusitas</Navbar.Brand>

@@ -3,8 +3,7 @@ import { ItemCount } from "./ItemCount"
 import { CartContext } from "../context/CartContext"
    
 
-export const ItemDetail =({producto})=>{ 
-       console.log(producto)
+export const ItemDetail =({producto})=>{        
        const {addItem}= useContext(CartContext)
        const onAdd= (contador)=> addItem(producto , contador )
        return( 
